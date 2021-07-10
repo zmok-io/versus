@@ -36,29 +36,29 @@ Ethereum JSONRPC requests.
 For example:
 
 ```
-$ export INFURA_API_KEY="..."
-$ ethspam | versus --stop-after=100 --concurrency=5 "https://mainnet.infura.io/v3/${INFURA_API_KEY}"
+$ export ZMOK_APP_ID="..."
+$ ethspam | versus --stop-after=200 --concurrency=20 "https://api.zmok.io/mainnet/${ZMOK_APP_ID}"
 Endpoints:
 
-0. "https://mainnet.infura.io/v3/..."
+0. "https://api.zmok.io/mainnet/XXX"
 
-   Requests:   90.16 per second
-   Timing:     0.0555s avg, 0.0405s min, 0.1866s max
-               0.0296s standard deviation
+   Requests:   573.17 per second
+   Timing:     0.0349s avg, 0.0094s min, 0.1576s max
+               0.0273s standard deviation
 
    Percentiles:
-     25% in 0.0441s
-     50% in 0.0468s
-     75% in 0.0515s
-     90% in 0.0629s
-     95% in 0.1685s
-     99% in 0.1866s
+     25% in 0.0204s
+     50% in 0.0273s
+     75% in 0.0331s
+     90% in 0.0799s
+     95% in 0.1104s
+     99% in 0.1236s
 
    Errors: 0.00%
 
 ** Summary for 1 endpoints:
-   Completed:  100 results with 100 total requests
-   Timing:     55.457821ms request avg, 1.413079345s total run time
+   Completed:  200 results with 200 total requests
+   Timing:     34.893493ms request avg, 516.87595ms total run time
    Errors:     0 (0.00%)
    Mismatched: 0
 ```
@@ -66,46 +66,47 @@ Endpoints:
 Similarly, we can run versus against multiple endpoints and each response body will be compared to match.
 
 ```
-$ ethspam | versus --stop-after=500 --concurrency=5 "https://mainnet.infura.io/v3/${INFURA_API_KEY}" "https://cloudflare-eth.com"
+$ ethspam | versus --stop-after=200 --concurrency=20 "https://api.zmok.io/mainnet/${ZMOK_APP_ID}" "https://cloudflare-eth.com"
 Endpoints:
 
-0. "https://mainnet.infura.io/v3/..."
+0. "https://api.zmok.io/mainnet/XXX"
 
-   Requests:   77.11 per second
-   Timing:     0.0648s avg, 0.0378s min, 1.2764s max
-               0.0759s standard deviation
+   Requests:   468.64 per second
+   Timing:     0.0427s avg, 0.0084s min, 0.1740s max
+               0.0350s standard deviation
 
    Percentiles:
-     25% in 0.0444s
-     50% in 0.0489s
-     75% in 0.0595s
-     90% in 0.0947s
-     95% in 0.1492s
-     99% in 0.2218s
+     25% in 0.0242s
+     50% in 0.0318s
+     75% in 0.0423s
+     90% in 0.1014s
+     95% in 0.1311s
+     99% in 0.1712s
 
    Errors: 0.00%
 
 1. "https://cloudflare-eth.com"
 
-   Requests:   64.22 per second
-   Timing:     0.0779s avg, 0.0300s min, 8.5036s max
-               0.4407s standard deviation
+   Requests:   160.35 per second, 157.61 per second for errors
+   Timing:     0.1247s avg, 0.0048s min, 0.4648s max
+               0.0851s standard deviation
 
    Percentiles:
-     25% in 0.0378s
-     50% in 0.0411s
-     75% in 0.0481s
-     90% in 0.0747s
-     95% in 0.1117s
-     99% in 0.2655s
+     25% in 0.0940s
+     50% in 0.1101s
+     75% in 0.1402s
+     90% in 0.2966s
+     95% in 0.3215s
+     99% in 0.3913s
 
-   Errors: 0.00%
+   Errors: 9.50%
+     19 × "bad status code: 429"
 
 ** Summary for 2 endpoints:
-   Completed:  500 results with 1000 total requests
-   Timing:     71.347768ms request avg, 10.092800734s total run time
-   Errors:     0 (0.00%)
-   Mismatched: 1
+   Completed:  200 results with 400 total requests
+   Timing:     83.702623ms request avg, 1.611950277s total run time
+   Errors:     19 (4.75%)
+   Mismatched: 57
 ```
 
 Note that there was one response mismatched out of the 500 iterations. If we
